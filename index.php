@@ -141,13 +141,13 @@
                             CEO
                         </div>
                         <p class="m-0">
-                            Phd scholar,<br>
+                            Phd scholar<br>
                             IIT (ISM), Dhanbad<br>
                         </p> &
-                        <p class="m-0"> Former Project Scientist,<br>
+                        <p class="m-0"> Former Project Scientist<br>
                             NERIST, Arunachal Pradesh
                         </p> &
-                        <p class="m-0">Network member,<br>
+                        <p class="m-0">Network member<br>
                             The association for geographic information, United Kingdom</p>
                     </div>
                 </div>

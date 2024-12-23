@@ -148,7 +148,7 @@
                             NERIST, Arunachal Pradesh
                         </p> &
                         <p class="m-0">Network member<br>
-                            The association for geographic information, United Kingdom</p>
+                            The association for geographic information United Kingdom</p>
                     </div>
                 </div>
             </div>

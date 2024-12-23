@@ -141,13 +141,14 @@
                             CEO
                         </div>
                         <p class="m-0">
-                        Phd scholar , <br>
-                        IIT (ISM), DHANBAD , <br>
-                        Former Project Scientist,<br>
+                            Phd scholar,<br>
+                            IIT (ISM), Dhanbad<br>
+                        </p> &
+                        <p class="m-0"> Former Project Scientist,<br>
                             NERIST, Arunachal Pradesh
                         </p> &
                         <p class="m-0">Network member,<br>
-                        The association for geographic information, United Kingdom</p>
+                            The association for geographic information, United Kingdom</p>
                     </div>
                 </div>
             </div>
@@ -232,7 +233,6 @@
         </div>
     </div>
 </section>
-
 
 <!-- client section -->
 <section class="py-5 mb-5">

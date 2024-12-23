@@ -16,192 +16,43 @@
     <div class="row mt-5 gallery">
         <div>
             <div class="row">
-                <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-                    <img
-                        src="assets/images/gallery/1.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4  animated animatedFadeInUp fadeInUp"
-                        alt="Boat on Calm Water" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" />
+                <?php
+                function loadGallery($galleryPath)
+                {
+                    if (is_dir($galleryPath)) {
 
-                    <img
-                        src="assets/images/gallery/2.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4  animated animatedFadeInUp fadeInUp"
-                        alt="Wintry Mountain Landscape" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" />
-                </div>
+                        $folders = scandir($galleryPath);
 
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <img
-                        src="assets/images/gallery/3.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4  animated animatedFadeInUp fadeInUp"
-                        alt="Mountains in the Clouds" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" />
+                        foreach ($folders as $folder) {
 
-                    <img
-                        src="assets/images/gallery/4.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4  animated animatedFadeInUp fadeInUp"
-                        alt="Boat on Calm Water" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" />
-                </div>
+                            if ($folder !== '.' && $folder !== '..' && is_dir($galleryPath . '/' . $folder)) {
 
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <img
-                        src="assets/images/gallery/5.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4  animated animatedFadeInUp fadeInUp"
-                        alt="Waves at Sea" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" />
+                                echo "<h3 class='my-4 px-3 py-2 animated animatedFadeInUp fadeInUp text-light bg-info bg-gradient rounded'>" . ucfirst($folder) . "</h3>";
 
-                    <img
-                        src="assets/images/gallery/6.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4  animated animatedFadeInUp fadeInUp"
-                        alt="Yosemite National Park" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" />
-                </div>
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <img
-                        src="assets/images/gallery/7.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4  animated animatedFadeInUp fadeInUp"
-                        alt="Waves at Sea" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" />
+                                $images = scandir($galleryPath . '/' . $folder);
 
-                    <img
-                        src="assets/images/gallery/8.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4  animated animatedFadeInUp fadeInUp"
-                        alt="Yosemite National Park" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" />
-                </div>
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <img
-                        src="assets/images/gallery/9.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4  animated animatedFadeInUp fadeInUp"
-                        alt="Waves at Sea" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" />
+                                foreach ($images as $image) {
+                                    $imagePath = $galleryPath . '/' . $folder . '/' . $image;
+                                    if (in_array(strtolower(pathinfo($imagePath, PATHINFO_EXTENSION)), ['jpg', 'jpeg', 'png', 'gif'])) {
+                                        echo "
+                                        <div class='col-lg-4 mb-0 mb-lg-0 mb-5'>
+                                            <img src='$imagePath' class='w-100 h-100 img-thumbnail shadow-1-strong rounded animated animatedFadeInUp fadeInUp' alt='$image' data-bs-toggle='modal' data-bs-target='#imageModal' />
+                                        </div>
+                                        ";
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        echo "Gallery folder does not exist.";
+                    }
+                }
 
-                    <img
-                        src="assets/images/gallery/10.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4  animated animatedFadeInUp fadeInUp"
-                        alt="Yosemite National Park" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" />
-                </div>
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <img
-                        src="assets/images/gallery/11.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4  animated animatedFadeInUp fadeInUp"
-                        alt="Waves at Sea" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" />
+                $galleryPath = 'assets/images/gallery';
 
-                    <img
-                        src="assets/images/gallery/12.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4  animated animatedFadeInUp fadeInUp"
-                        alt="Yosemite National Park" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" />
-                </div>
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <img
-                        src="assets/images/gallery/13.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4  animated animatedFadeInUp fadeInUp"
-                        alt="Waves at Sea" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" />
+                loadGallery($galleryPath);
 
-                    <img
-                        src="assets/images/gallery/14.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4  animated animatedFadeInUp fadeInUp"
-                        alt="Yosemite National Park" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" />
-                </div>
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <img
-                        src="assets/images/gallery/15.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4  animated animatedFadeInUp fadeInUp"
-                        alt="Waves at Sea" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" />
-
-                    <img
-                        src="assets/images/gallery/16.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4  animated animatedFadeInUp fadeInUp"
-                        alt="Yosemite National Park" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" />
-                </div>
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <img
-                        src="assets/images/gallery/17.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4  animated animatedFadeInUp fadeInUp"
-                        alt="Waves at Sea" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" />
-
-                    <img
-                        src="assets/images/gallery/18.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4  animated animatedFadeInUp fadeInUp"
-                        alt="Yosemite National Park" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" />
-                </div>
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <img
-                        src="assets/images/gallery/19.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4  animated animatedFadeInUp fadeInUp"
-                        alt="Waves at Sea" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" />
-
-                    <img
-                        src="assets/images/gallery/20.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4  animated animatedFadeInUp fadeInUp"
-                        alt="Yosemite National Park" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" />
-                </div>
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <img
-                        src="assets/images/gallery/21.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4  animated animatedFadeInUp fadeInUp"
-                        alt="Waves at Sea" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" />
-
-                    <img
-                        src="assets/images/gallery/22.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4  animated animatedFadeInUp fadeInUp"
-                        alt="Yosemite National Park" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" />
-                </div>
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <img
-                        src="assets/images/gallery/13.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4  animated animatedFadeInUp fadeInUp"
-                        alt="Waves at Sea" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" />
-
-                    <img
-                        src="assets/images/gallery/24.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4  animated animatedFadeInUp fadeInUp"
-                        alt="Yosemite National Park" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" />
-                </div>
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <img
-                        src="assets/images/gallery/25.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4  animated animatedFadeInUp fadeInUp"
-                        alt="Waves at Sea" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" />
-                </div>
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <img
-                        src="assets/images/gallery/26.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4  animated animatedFadeInUp fadeInUp"
-                        alt="Yosemite National Park" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" />
-                </div>
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <img
-                        src="assets/images/gallery/27.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4  animated animatedFadeInUp fadeInUp"
-                        alt="Waves at Sea" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" />
-                </div>
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <img
-                        src="assets/images/gallery/28.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4  animated animatedFadeInUp fadeInUp"
-                        alt="Yosemite National Park" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" />
-                </div>
+                ?>
             </div>
             <!-- Gallery -->
         </div>

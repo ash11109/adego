@@ -49,9 +49,7 @@
                 }
 
                 $galleryPath = 'assets/images/gallery';
-
                 loadGallery($galleryPath);
-
                 ?>
             </div>
             <!-- Gallery -->

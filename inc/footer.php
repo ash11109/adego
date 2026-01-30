@@ -9,7 +9,8 @@
                 <p class="mb-1 px-3"><a class="text-primary text-decoration-none" href="index.php">Home</a></p>
                 <p class="mb-1 px-3"><a class="text-primary text-decoration-none" href="gallery.php">Gallery</a></p>
                 <p class="mb-1 px-3"><a class="text-primary text-decoration-none" href="about.php">About</a></p>
-                <p class="mb-0 px-3"><a class="text-primary text-decoration-none" href="contact.php">Contacts</a></p>
+                <p class="mb-1 px-3"><a class="text-primary text-decoration-none" href="contact.php">Contacts</a></p>
+                <p class="mb-0 px-3"><a class="text-primary text-decoration-none" href="career.php">Career</a></p>
             </div>
             <div class="col-12 col-lg-3 pt-1 small text-lg-end mb-3">
                 <p class="mb-1 px-3 fw-bold">Registered Office</p>

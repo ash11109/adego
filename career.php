@@ -156,5 +156,12 @@ if ($_GET['status'] ?? '' === 'success'): ?>
     </div>
 </section>
 
+<div class="container my-4">
+    <div class="alert alert-primary text-center border-0 py-4" role="alert">
+        Concern Person <br><strong>Rakesh kumar Singh</strong>
+        <p>PhD Scholar IIT (ISM) & CEO ADEGO COMMUNICATION PVT LTD</p>
+        <strong>8001100128</strong> / <strong>7004551533</strong>
+    </div>
+</div>
 
 <?php require_once 'inc/footer.php' ?>

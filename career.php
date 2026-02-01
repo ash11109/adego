@@ -38,6 +38,13 @@ require_once 'inc/data.php';
 
                         <div class="accordion-body">
 
+                            <?php if (!empty($job['total_post'])): ?>
+                                <p class="text-muted mb-2">
+                                    <strong>No. of Posts:</strong>
+                                    <?= htmlspecialchars($job['total_post']) ?>
+                                </p>
+                            <?php endif; ?>
+
                             <?php if (!empty($job['experience'])): ?>
                                 <p class="text-muted mb-2">
                                     <strong>Experience:</strong>
@@ -46,7 +53,7 @@ require_once 'inc/data.php';
                             <?php endif; ?>
 
                             <?php if (!empty($job['qualification'])): ?>
-                                <h6>Qualification</h6>
+                                <h6 class="fw-bold">Qualification</h6>
                                 <ul>
                                     <?php foreach ($job['qualification'] as $qual): ?>
                                         <li><?= htmlspecialchars($qual) ?></li>
@@ -55,7 +62,7 @@ require_once 'inc/data.php';
                             <?php endif; ?>
 
                             <?php if (!empty($job['responsibilities'])): ?>
-                                <h6>Key Responsibilities</h6>
+                                <h6 class="fw-bold">Key Responsibilities</h6>
                                 <ul>
                                     <?php foreach ($job['responsibilities'] as $res): ?>
                                         <li><?= htmlspecialchars($res) ?></li>
@@ -64,7 +71,7 @@ require_once 'inc/data.php';
                             <?php endif; ?>
 
                             <?php if (!empty($job['skills'])): ?>
-                                <h6>Skills Required</h6>
+                                <h6 class="fw-bold">Skills Required</h6>
                                 <ul>
                                     <?php foreach ($job['skills'] as $skill): ?>
                                         <li><?= htmlspecialchars($skill) ?></li>

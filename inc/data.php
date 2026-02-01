@@ -3,6 +3,7 @@
 $job_openings = [
     [
         'title' => 'Asst. Field Manager (Forestry)',
+        'total_post' => '20',
         'location' => 'Jharkhand',
         'experience' => '1–2 Years (Desirable)',
         'responsibilities' => [
@@ -25,6 +26,7 @@ $job_openings = [
     ],
     [
         'title' => 'Asst. Field Manager (Statistic)',
+        'total_post' => '20',
         'location' => 'Jharkhand',
         'experience' => '1–2 Years (Desirable)',
         'responsibilities' => [
@@ -47,6 +49,7 @@ $job_openings = [
     ],
     [
         'title' => 'Sr. Asst. Manager (Team Leader)',
+        'total_post' => '10',
         'location' => 'Jharkhand',
         'experience' => '3 Years (Desirable)',
         'responsibilities' => [
@@ -69,6 +72,7 @@ $job_openings = [
     ],
     [
         'title' => 'Field Surveyor',
+        'total_post' => '120',
         'location' => 'As per project requirement',
         'experience' => 'Experienced candidates preferred',
         'responsibilities' => [

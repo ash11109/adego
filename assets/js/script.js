@@ -27,45 +27,87 @@ $(document).ready(function () {
   checkInView();
   $(window).on("scroll", checkInView);
 
-
-  // contact us form handler
-
-  $("#contact-form").submit(function (e) {
-    e.preventDefault();
-    if (
-      $("#form_name").val() == "" ||
-      $("#form_email").val() == "" ||
-      $("#form_interest").val() == ""
-    ) {
-      var msg = `<div class="alert alert-danger alert-dismissible fade show" role="alert mt-3">
-        <strong>Error:</strong> Please fill all required <span class="text-danger">*</span> details.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>`;
-      $("#msg").html(msg);
-    } else {
-      const formData = new FormData(this);
-      $.ajax({
-        url: "backend/contact_process.php",
-        method: "POST",
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function (res) {
-          var obj = jQuery.parseJSON(res);
-          if (obj.status == 1) {
-            $("#msg").html(obj.msg);
-            $("#contact-form")[0].reset();
-          } else {
-            $("#msg").html(obj.msg);
-          }
-        },
-      });
-    }
-  });
-
   // When an image is clicked
   $(".gallery img").click(function () {
     var imgSrc = $(this).attr("src"); // Get the source of the clicked image
     $("#modalImage").attr("src", imgSrc); // Set the modal image source
   });
+});
+
+
+// Contact Us Application -------------------------------------------------------------------------------
+
+$("#contact-form").submit(async function (e) {
+  e.preventDefault();
+
+  const $btn = $("#contact-btn");
+  const btnText = $btn.text();
+
+  $btn.prop("disabled", true).html("Sending...");
+
+  try {
+    let formData = new FormData(this);
+    formData.append("action", "website_contact_us");
+
+    let response = await fetch(API, {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error("Server error");
+    }
+
+    let result = await response.json();
+
+    if (result.status == 1) {
+      window.location.href = `contact.php?success=${result.msg}`;
+    } else {
+      window.location.href = `contact.php?error=${result.msg}`;
+    }
+
+  } catch (error) {
+    window.location.href = "contact.php?error=Failed to send message. Please try again later.";
+  } finally {
+    $btn.prop("disabled", false).html(btnText);
+  }
+});
+
+
+// Job Application ------------------------------------------------------------------------------------
+
+$("#career-application-form").submit(async function (e) {
+  e.preventDefault();
+
+  const $btn = $("#career-btn");
+  const btnText = $btn.text();
+
+  $btn.prop("disabled", true).html("Submitting...");
+
+  try {
+    let formData = new FormData(this);
+    formData.append("action", "save_career_application");
+
+    let response = await fetch(API, {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error("Server error");
+    }
+
+    let result = await response.json();
+
+    if (result.status == 1) {
+      window.location.href = `career.php?success=${result.msg}`;
+    } else {
+      window.location.href = `career.php?error=${result.msg}`;
+    }
+
+  } catch (error) {
+    window.location.href ="career.php?error=Failed to submit job application. Please try again later.";
+  } finally {
+    $btn.prop("disabled", false).html(btnText);
+  }
 });

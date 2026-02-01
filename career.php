@@ -101,28 +101,26 @@ require_once 'inc/data.php';
     </div>
 </section>
 
-<?php
-if ($_GET['status'] ?? '' === 'success'): ?>
-    <div class="container my-4">
-        <div class="alert alert-success text-center" role="alert">
-            Your application has been submitted successfully. We will get back to you soon.
-        </div>
-    </div>
-<?php elseif ($_GET['status'] ?? '' === 'error'): ?>
-    <div class="container my-4">
-        <div class="alert alert-danger text-center" role="alert">
-            There was an error submitting your application. Please try again.
-        </div>
-    </div>
-<?php else: endif;
-?>
-
 <section class="container my-5" id="apply">
     <h2 class="text-center mb-4">Apply Now</h2>
 
+    <?php if (isset($_GET['success'])) { ?>
+        <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+            <strong>Success!</strong> <?= htmlspecialchars($_GET['success']); ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    <?php } ?>
+
+    <?php if (isset($_GET['error'])) { ?>
+        <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+            <strong>Error!</strong> <?= htmlspecialchars($_GET['error']); ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    <?php } ?>
+
     <div class="apply-section bg-primary bg-opacity-10 bg-gradient p-4 py-5 p-md-5 rounded shadow-sm">
 
-        <form action="backend/submit_application.php" method="post" enctype="multipart/form-data" class="row g-3" novalidate>
+        <form id="career-application-form" class="row g-3">
 
             <div class="col-md-6">
                 <label class="form-label">Full Name <span class="text-danger">*</span></label>
@@ -136,7 +134,7 @@ if ($_GET['status'] ?? '' === 'success'): ?>
 
             <div class="col-md-6">
                 <label class="form-label">Mobile Number <span class="text-danger">*</span></label>
-                <input type="tel" name="mobile" class="form-control" placeholder="10-digit mobile number" pattern="[0-9]{10}" required>
+                <input type="tel" name="mobile" class="form-control" placeholder="10-digit mobile number" maxlength="10" pattern="[0-9]{10}" required>
             </div>
 
             <div class="col-md-6">
@@ -151,13 +149,13 @@ if ($_GET['status'] ?? '' === 'success'): ?>
                 </select>
             </div>
 
-            <div class="col-12">
+            <!-- <div class="col-12">
                 <label class="form-label"> Upload Resume <small class="text-muted">(PDF only)</small></label>
                 <input type="file" name="resume" class="form-control" accept="application/pdf" required>
-            </div>
+            </div> -->
 
             <div class="col-12 text-center mt-4">
-                <button type="submit" class="btn btn-primary px-5 py-2"> Submit Application</button>
+                <button type="submit" class="btn btn-primary px-5 py-2" id="career-btn">Submit Application</button>
             </div>
         </form>
     </div>

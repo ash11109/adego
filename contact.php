@@ -26,7 +26,7 @@
                     <label class="form-label" for="form_email">Email address <span class="text-danger">*</span></label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="text" id="form_phone" name="phone" class="form-control" maxlength="13" />
+                    <input type="text" id="form_phone" name="phone" class="form-control"  maxlength="10" pattern="[0-9]{10}" />
                     <label class="form-label" for="form_phone">Phone Number</label>
                 </div>
                 <div class="form-floating mb-3">
@@ -41,9 +41,23 @@
                     <textarea class="form-control" id="#form_message" name="message" rows="5"></textarea>
                     <label class="form-label" for="#form_message">Message / Enquiry</label>
                 </div>
-                <button type="submit" class="w-100 btn btn btn-primary">Send</button>
+                <button type="submit" class="w-100 btn btn btn-primary" id="contact-btn">Send</button>
             </form>
-            <div id="msg"></div>
+
+            <?php if (isset($_GET['success'])) { ?>
+                <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+                    <strong>Success!</strong> <?= htmlspecialchars($_GET['success']); ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            <?php } ?>
+
+            <?php if (isset($_GET['error'])) { ?>
+                <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+                    <strong>Error!</strong> <?= htmlspecialchars($_GET['error']); ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            <?php } ?>
+
         </div>
     </div>
 </div>

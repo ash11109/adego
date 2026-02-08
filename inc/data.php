@@ -94,3 +94,36 @@ $job_openings = [
         'selection_mode' => 'Viva / Interview'
     ]
 ];
+
+$certificates = [
+    [
+        'url' => 'reg_sms.jpg',
+        'name' => 'ISO Certification',
+        'alt' => '',
+        'desciption' => ''
+    ],
+    [
+        'url' => 'reg_ems.jpg',
+        'name' => 'ISO Certification',
+        'alt' => '',
+        'desciption' => ''
+    ],
+    [
+        'url' => 'adego_con.png',
+        'name' => 'Certificate of Nomination',
+        'alt' => '',
+        'desciption' => ''
+    ],
+    [
+        'url' => 'adego_nesac.png',
+        'name' => 'Certificate of Participation',
+        'alt' => '',
+        'desciption' => ''
+    ],
+    [
+        'url' => 'adego_nesac2.png',
+        'name' => 'Certificate of Participation',
+        'alt' => '',
+        'desciption' => ''
+    ]
+];

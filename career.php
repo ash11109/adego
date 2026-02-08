@@ -1,7 +1,4 @@
-<?php
-require_once 'inc/header.php';
-require_once 'inc/data.php';
-?>
+<?php require_once 'inc/header.php';?>
 
 <header class="career-hero">
     <h1 class="fw-bold pt-5 pt-md-2">Careers</h1>

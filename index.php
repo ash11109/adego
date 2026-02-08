@@ -234,6 +234,33 @@
     </div>
 </section>
 
+<!-- Certificate Section -->
+<section class="bg-light rounded-5 shadow-sm py-md-5 py-4 certificate-section">
+    <div class="container mt-4">
+        <div class="section-header">
+            <h2 class="text-center fw-semibold mb-5 display-6">Merits of <span class="text-main">excellence</span></h2>
+        </div>
+
+        <div class="row g-4">
+            <?php foreach ($certificates as $certificate): ?>
+                <div class="col-lg-4 col-md-6">
+                    <div class="certificate-card">
+                        <div class="certificate-image-wrapper">
+                            <img src="assets/images/certificate/<?php echo htmlspecialchars($certificate['url']); ?>"
+                                alt="<?php echo htmlspecialchars($certificate['alt'] ?: $certificate['name']); ?>"
+                                class="certificate-image lazy">
+                        </div>
+                        <div class="certificate-info">
+                            <h3 class="certificate-title text-main"><?php echo htmlspecialchars($certificate['name']); ?></h3>
+                            <p class="certificate-description"><?php echo htmlspecialchars($certificate['desciption']); ?></p>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
 <!-- client section -->
 <section class="py-5 mb-5">
     <div class="row justify-content-center text-center mb-2 mb-lg-4 mb-5  animated animatedFadeInUp fadeInUp m-0">

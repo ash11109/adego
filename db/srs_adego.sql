@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3308
--- Generation Time: Feb 01, 2026 at 02:47 PM
+-- Generation Time: Feb 11, 2026 at 02:38 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -33,6 +33,7 @@ CREATE TABLE `career` (
   `email` varchar(50) NOT NULL,
   `mobile` varchar(10) NOT NULL,
   `apply_for` varchar(100) NOT NULL,
+  `resume` varchar(100) DEFAULT NULL,
   `status` varchar(20) NOT NULL,
   `applied_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -41,9 +42,19 @@ CREATE TABLE `career` (
 -- Dumping data for table `career`
 --
 
-INSERT INTO `career` (`id`, `applicant_name`, `email`, `mobile`, `apply_for`, `status`, `applied_at`) VALUES
-(1, 'Keith Duke', 'qujasevavy@mailinator.com', '6448494894', 'Field Surveyor', 'applied', '2026-02-01 19:04:38'),
-(2, 'Leila Key', 'kuruvo@mailinator.com', '9494984948', 'Sr. Asst. Manager (Team Leader)', 'applied', '2026-02-01 19:06:56');
+INSERT INTO `career` (`id`, `applicant_name`, `email`, `mobile`, `apply_for`, `resume`, `status`, `applied_at`) VALUES
+(1, 'Keith Duke', 'qujasevavy@mailinator.com', '6448494894', 'Field Surveyor', '', 'applied', '2026-02-01 19:04:38'),
+(2, 'Harish Kumar', 'kuruvo@mailinator.com', '9494984948', 'Sr. Asst. Manager (Team Leader)', '123.pdf', 'applied', '2026-02-01 19:06:56'),
+(3, 'NPNarayan', 'npnarayan1992@gmail.com', '8789171115', 'Sr. Asst. Manager (Team Leader)', '', 'applied', '2026-02-11 16:23:21'),
+(4, 'Jackson Bentley', 'napijulu@mailinator.com', '5145459454', 'Sr. Asst. Manager (Team Leader)', '', 'applied', '2026-02-11 16:24:57'),
+(5, 'James Bruce', 'tajyqiq@mailinator.com', '5154564894', 'Asst. Field Manager (Statistic)', '', 'applied', '2026-02-11 16:26:27'),
+(6, 'NPNarayan', 'npnarayan1992@gmail.com', '7567658756', 'Asst. Field Manager (Statistic)', '', 'applied', '2026-02-11 16:27:32'),
+(7, 'Autumn Ferguson', 'simaky@mailinator.com', '7477678686', 'Asst. Field Manager (Statistic)', '', 'applied', '2026-02-11 16:31:46'),
+(8, 'Martina Miller', 'mezulymaw@mailinator.com', '1851515151', 'Asst. Field Manager (Statistic)', '', 'applied', '2026-02-11 16:35:47'),
+(9, 'Odette Lynch', 'fuka@mailinator.com', '6456545646', 'Asst. Field Manager (Statistic)', '', 'applied', '2026-02-11 16:40:51'),
+(10, 'Brynn Porter', 'sefidagyru@mailinator.com', '5456464654', 'Asst. Field Manager (Statistic)', '', 'applied', '2026-02-11 16:42:18'),
+(11, 'Alec Mcmillan', 'nimexe@mailinator.com', '1565645645', 'Asst. Field Manager (Statistic)', '', 'applied', '2026-02-11 16:47:18'),
+(12, 'Cameron Mcintosh', 'nahaju@mailinator.com', '4594984949', 'Field Surveyor', '', 'applied', '2026-02-11 17:17:07');
 
 -- --------------------------------------------------------
 
@@ -139,7 +150,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `name`, `email`, `type`, `status`, `last_login`) VALUES
-(1, 'adego', '1234', 'Adego Admin', 'adegocommunication@gmail.com', '1', '1', '2026-02-01 17:25:55');
+(1, 'adego', '1234', 'Adego Admin', 'adegocommunication@gmail.com', '1', '1', '2026-02-11 16:20:37');
 
 --
 -- Indexes for dumped tables
@@ -171,7 +182,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `career`
 --
 ALTER TABLE `career`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `contact_us`

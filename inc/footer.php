@@ -1,7 +1,7 @@
 <footer class="bg-light">
     <div class="container">
+        <a href="index.php" class="mx-4 d-block pt-4"><img alt="Free Frontend Logo" class="img-fluid" height="" src="assets/images/logo/logo.png" width="140"></a>
         <div class="row justify-content-between pt-4">
-            <a href="index.php"><img alt="Free Frontend Logo" class="img-fluid" height="" src="assets/images/logo/logo.png" width="140"></a>
             <div class="col-12 col-lg-7">
                 <p class="px-3 mb-3 text-muted" style="text-align:justify;">"Welcome to Adego Communication Pvt Ltd – we're glad you're here! Explore our commitment to quality, innovation, and exceptional service. <br>Thank you for visiting our website."</p>
             </div>
@@ -34,9 +34,9 @@
     </div>
 
     <div class="container-fluid bg-primary bg-gradient">
-        <div class="container d-lg-flex justify-content-between">
-            <div class="small">
-                <p class="text-light fw-light pt-2">© 2024 all rights reserved. Developed by <a href="http://sysrootsolution.com" class="text-white fw-bold text-decoration-none ">Sysroot Solution Pvt Ltd.</a></p>
+        <div class="container d-lg-flex justify-content-center">
+            <div class="py-2">
+                <p class="text-light small fw-light m-0">© 2024 ADEGO. All rights reserved. Developed by <a href="http://sysrootsolution.com" class="text-white fw-bold text-decoration-none ">Sysroot Solution Pvt Ltd.</a></p>
             </div>
         </div>
     </div>

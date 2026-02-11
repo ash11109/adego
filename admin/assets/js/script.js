@@ -413,6 +413,15 @@ function getJobApplications() {
             { data: "email" },
             { data: "mobile" },
             { data: "apply_for" },
+            {
+                data: "resume",
+                render: function (data, type, row) {
+                    if (data !== "") {
+                        return `<a href="../uploads/resume/${data}" class="btn btn-info btn-sm px-3" target="_blank">View Resume</a>`;
+                    }
+                    return 'Not Available';
+                }
+            },
             { data: "status" },
             {
                 data: "applied_at",

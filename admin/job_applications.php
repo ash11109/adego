@@ -35,6 +35,7 @@
                                                 <th>Email</th>
                                                 <th>Phone</th>
                                                 <th>Applied For</th>
+                                                <th>Resume</th>
                                                 <th>Status</th>
                                                 <th>Applied At</th>
                                             </tr>

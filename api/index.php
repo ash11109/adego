@@ -289,7 +289,7 @@ if ($action == 'login') {
     }
 } else if ($action == 'get_career_applications') {
 
-    $columns = ['sno', 'applicant_name', 'email', 'mobile', 'apply_for', 'status', 'applied_at'];
+    $columns = ['sno', 'applicant_name', 'email', 'mobile', 'apply_for', 'resume', 'status', 'applied_at'];
 
     $draw   = isset($_POST['draw']) ? intval($_POST['draw']) : 0;
     $start  = isset($_POST['start']) ? intval($_POST['start']) : 0;

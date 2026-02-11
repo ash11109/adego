@@ -146,10 +146,10 @@
                 </select>
             </div>
 
-            <!-- <div class="col-12">
+            <div class="col-12">
                 <label class="form-label"> Upload Resume <small class="text-muted">(PDF only)</small></label>
-                <input type="file" name="resume" class="form-control" accept="application/pdf" required>
-            </div> -->
+                <input type="file" name="resume" id="resume" class="form-control" accept="application/pdf" >
+            </div>
 
             <div class="col-12 text-center mt-4">
                 <button type="submit" class="btn btn-primary px-5 py-2" id="career-btn">Submit Application</button>

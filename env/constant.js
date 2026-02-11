@@ -32,7 +32,7 @@ const project_data = {
 if (PROJECT_STATUS == 'LIVE') {
 
     API = 'https://adego.in/api/';
-    UPLOAD_FOLDER = '';
+    UPLOAD_FOLDER = 'adego';
 
 } else {
 

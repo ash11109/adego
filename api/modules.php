@@ -119,3 +119,88 @@ function sendJobEmail($name, $email, $mobile, $position, $resume)
 
     return $result;
 }
+
+// uploading files (max 2MB File Size, default)
+function uploadFile($fileInputName, $uploadDir, $customName = '', $allowedTypes = [], $maxSize = 2097152)
+{
+    // Check if file exists
+    if (!isset($_FILES[$fileInputName]) || $_FILES[$fileInputName]['error'] === UPLOAD_ERR_NO_FILE) {
+        return [
+            'status' => 2,
+            'msg' => "No file uploaded."
+        ];
+    }
+
+    $file = $_FILES[$fileInputName];
+
+    // Check for upload error
+    // if ($file['error'] !== UPLOAD_ERR_OK) {
+    //     return [
+    //         'status' => 0,
+    //         'msg' => "Error during file upload."
+    //     ];
+    // }
+
+    $fileTmpPath = $file['tmp_name'];
+    $fileName = $file['name'];
+    $fileSize = $file['size'];
+    $fileType = mime_content_type($fileTmpPath);
+    $fileExt  = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+    // Check file size
+    // if ($fileSize > $maxSize) {
+    //     return [
+    //         'status' => 0,
+    //         'msg' => "File size exceeds limit."
+    //     ];
+    // }
+
+    // Validate MIME type
+    // if (!empty($allowedTypes)) {
+
+    //     if (!in_array($fileType, $allowedTypes)) {
+    //         return [
+    //             'status' => 0,
+    //             'msg' => "Invalid file type."
+    //         ];
+    //     }
+
+    //     $allowedExt = ['pdf', 'jpg', 'jpeg', 'png', 'webp'];
+
+    //     if (!in_array($fileExt, $allowedExt)) {
+    //         return [
+    //             'status' => 0,
+    //             'msg' => "Invalid file extension."
+    //         ];
+    //     }
+    // }
+
+
+    // Create directory if not exists
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0777, true);
+    }
+
+    // Generate new file name
+    if (!empty($customName)) {
+        $newFileName = $customName . '_' . date('YmdHis') . '.' . $fileExt;
+    } else {
+        $newFileName = date('YmdHis') . '.' . $fileExt;
+    }
+
+    $destination = rtrim($uploadDir, '/') . '/' . $newFileName;
+
+    // Move file
+    if (move_uploaded_file($fileTmpPath, $destination)) {
+        return [
+            'status' => 1,
+            'file_name' => $newFileName,
+            'file_path' => $destination
+        ];
+    } else {
+        return [
+            'status' => 0,
+            'msg' => "Failed to move uploaded file."
+        ];
+    }
+}

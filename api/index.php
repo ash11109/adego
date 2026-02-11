@@ -234,12 +234,10 @@ if ($action == 'login') {
     $mobile = isset($mobile) ? sanitizeInput($con, $mobile) : '';
     $position = isset($position) ? sanitizeInput($con, $position) : '';
 
-    $resume_pdf = $resume ?? '';
-
     $status = "applied";
     $applied_at = date("Y-m-d H:i:s");
 
-    $sql_check = "SELECT * FROM `career` WHERE `applicant_name` = '$name' AND `mobile` = '$mobile' AND `apply_for` = '$position' AND `status` = '$status'";
+    $sql_check = "SELECT id FROM career WHERE applicant_name='$name' AND mobile='$mobile' AND apply_for='$position' AND status='$status'";
     $res_check = mysqli_query($con, $sql_check);
 
     if ($res_check && mysqli_num_rows($res_check) > 0) {
@@ -248,28 +246,44 @@ if ($action == 'login') {
             "msg" => "You have already applied for this post. Please wait for response.",
         ];
     } else {
-        $sql = "INSERT INTO `career`(`applicant_name`,`email`, `mobile`,`apply_for`,`status`,`applied_at`) 
-        VALUES('$name', '$email', '$mobile', '$position', '$status', '$applied_at')";
-        $res = mysqli_query($con, $sql);
 
-        if ($res) {
-            $isMailSent = sendJobEmail($name, $email, $mobile, $position, $resume_pdf);
+        $resume_file = $resume;
+        $target_path = '../uploads/resume/';
 
-            if ($isMailSent) {
+        $file_name = '';
+        $upload_error = '';
+
+        $upload_result = uploadFile($resume_file, $target_path);
+
+        if ($upload_result['status'] == 1) {
+            $file_name = $upload_result['file_name'];
+        } else {
+            $upload_error = $upload_result['msg'];
+        }
+
+        if ($upload_result['status'] == 1 || $upload_result['status'] == 2) {
+
+            $sql = "INSERT INTO career (applicant_name,email,mobile,apply_for,resume,status,applied_at) VALUES('$name','$email','$mobile','$position','$file_name','$status','$applied_at')";
+            $res = mysqli_query($con, $sql);
+
+            if ($res) {
+                // $isMailSent = sendJobEmail($name, $email, $mobile, $position, $resume_file);
+
                 $data = [
                     "status" => 1,
-                    "msg" => "Application sent successfully. We will contact through email or phone when required.",
+                    "msg" => "Application sent successfully. We will contact you when required.",
                 ];
             } else {
+
                 $data = [
-                    "status" => 1,
-                    "msg" => "Application saved in records. Please wait for response.",
+                    "status" => 0,
+                    "msg" => "Failed to receive job application details.",
                 ];
             }
         } else {
             $data = [
                 "status" => 0,
-                "msg" => "Failed to recieve job application details.",
+                "msg" => $upload_error,
             ];
         }
     }

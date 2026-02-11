@@ -35,6 +35,33 @@ $(document).ready(function () {
 });
 
 
+// Custom Functions -------------------------------------------------------------------------------------
+
+function validateFile(inputElement, allowedTypes, maxSizeMB) {
+
+  let file = inputElement.files[0];
+
+  if (!file) {
+    return true;
+  }
+
+  let fileName = file.name.toLowerCase();
+  let extension = fileName.split('.').pop();
+
+  if (!allowedTypes.includes(extension)) {
+    return "Only " + allowedTypes.join(", ").toUpperCase() + " files are allowed.";
+  }
+
+  let maxSize = maxSizeMB * 1024 * 1024;
+
+  if (file.size > maxSize) {
+    return "File size must be less than " + maxSizeMB + "MB.";
+  }
+
+  return true;
+}
+
+
 // Contact Us Application -------------------------------------------------------------------------------
 
 $("#contact-form").submit(async function (e) {
@@ -82,6 +109,15 @@ $("#career-application-form").submit(async function (e) {
   const $btn = $("#career-btn");
   const btnText = $btn.text();
 
+  if ($("#resume")[0].files[0]) {
+    let result = validateFile($("#resume")[0], ["pdf"], 2);
+
+    if (result !== true) {
+      e.preventDefault();
+      window.location.href = "career.php?error=" + encodeURIComponent(result);
+    }
+  }
+
   $btn.prop("disabled", true).html("Submitting...");
 
   try {
@@ -106,7 +142,7 @@ $("#career-application-form").submit(async function (e) {
     }
 
   } catch (error) {
-    window.location.href ="career.php?error=Failed to submit job application. Please try again later.";
+    window.location.href = "career.php?error=Failed to submit job application. Please try again later." + error;
   } finally {
     $btn.prop("disabled", false).html(btnText);
   }

@@ -36,6 +36,6 @@ if (PROJECT_STATUS == 'LIVE') {
 
 } else {
 
-    API = 'http://localhost/2024/adego/api/';
+    API = 'http://localhost/2025/adego/api/';
     UPLOAD_FOLDER = 'test';
 }

@@ -62,63 +62,66 @@ function sendEmail($name, $email, $phone, $address, $interest, $message)
 }
 
 // send job application (mail)
-function sendJobEmail($name, $email, $mobile, $position, $resume)
+function sendJobEmail()
 {
-    $name = $_REQUEST['name'] ?? '';
-    $email = $_REQUEST['email'] ?? '';
-    $mobile = $_REQUEST['mobile'] ?? '';
-    $position = $_REQUEST['position'] ?? '';
-    $resume = $_FILES['resume'] ?? null;
+    $name     = $_POST['name'] ?? '';
+    $email    = $_POST['email'] ?? '';
+    $mobile   = $_POST['mobile'] ?? '';
+    $position = $_POST['position'] ?? '';
+    $resume   = $_FILES['resume'] ?? null;
 
-    $subject = "ADEGO | Job Application for " . $position;
-
-    $to = "adegocommunication@gmail.com";       // official email address
-
-    $headers = "From: " . $name . " <" . $email . ">\r\n";
-    $headers .= "Reply-To: " . $email . "\r\n";
-    $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-
-    $email_subject = $subject;
-
-    $email_body = "<h2>Job Application</h2>";
-    $email_body .= "<p><strong>Name:</strong><br>{$name}</p>";
-    $email_body .= "<p><strong>Email:</strong><br>{$email}</p>";
-    $email_body .= "<p><strong>Mobile Number:</strong><br>{$mobile}</p>";
-    $email_body .= "<p><strong>Position Applied For:</strong><br>{$position}</p>";
-
-    // Handle file upload
-    if ($resume && $resume['error'] == UPLOAD_ERR_OK) {
-        $file_tmp_path = $resume['tmp_name'];
-        $file_name = basename($resume['name']);
-        $file_size = $resume['size'];
-        $file_type = $resume['type'];
-
-        // Read the file content
-        $handle = fopen($file_tmp_path, "r");
-        $content = fread($handle, $file_size);
-        fclose($handle);
-        $encoded_content = chunk_split(base64_encode($content));
-
-        // Create a boundary string
-        $boundary = md5(time());
-
-        // Add attachment to email body
-        $email_body .= "--" . $boundary . "\r\n";
-        $email_body .= "Content-Type: " . $file_type . "; name=\"" . $file_name . "\"\r\n";
-        $email_body .= "Content-Disposition: attachment; filename=\"" . $file_name . "\"\r\n";
-        $email_body .= "Content-Transfer-Encoding: base64\r\n\r\n";
-        $email_body .= $encoded_content . "\r\n";
-        $email_body .= "--" . $boundary . "--";
-
-        // Update headers for attachment
-        $headers .= "MIME-Version: 1.0\r\n";
-        $headers .= "Content-Type: multipart/mixed; boundary=\"" . $boundary . "\"\r\n";
+    if (empty($name) || empty($email) || empty($mobile) || empty($position)) {
+        return false;
     }
 
-    $result = mail($to, $email_subject, $email_body, $headers);
+    $to = "adegocommunication@gmail.com";
+    $subject = "ADEGO | Job Application for " . $position;
 
-    return $result;
+    // Sanitize email
+    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+
+    $boundary = md5(time());
+
+    $headers  = "From: " . $email . "\r\n";
+    $headers .= "Reply-To: " . $email . "\r\n";
+    $headers .= "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: multipart/mixed; boundary=\"".$boundary."\"\r\n";
+
+    // HTML Body
+    $body  = "--".$boundary."\r\n";
+    $body .= "Content-Type: text/html; charset=UTF-8\r\n";
+    $body .= "Content-Transfer-Encoding: 7bit\r\n\r\n";
+
+    $body .= "<h2>Job Application</h2>";
+    $body .= "<p><strong>Name:</strong> {$name}</p>";
+    $body .= "<p><strong>Email:</strong> {$email}</p>";
+    $body .= "<p><strong>Mobile:</strong> {$mobile}</p>";
+    $body .= "<p><strong>Position:</strong> {$position}</p>\r\n\r\n";
+
+    // Attachment
+    if ($resume && $resume['error'] == UPLOAD_ERR_OK) {
+
+        $allowed = ['pdf','doc','docx'];
+        $file_ext = strtolower(pathinfo($resume['name'], PATHINFO_EXTENSION));
+
+        if (in_array($file_ext, $allowed)) {
+
+            $file_content = chunk_split(base64_encode(file_get_contents($resume['tmp_name'])));
+            $file_name = basename($resume['name']);
+
+            $body .= "--".$boundary."\r\n";
+            $body .= "Content-Type: application/octet-stream; name=\"".$file_name."\"\r\n";
+            $body .= "Content-Disposition: attachment; filename=\"".$file_name."\"\r\n";
+            $body .= "Content-Transfer-Encoding: base64\r\n\r\n";
+            $body .= $file_content."\r\n\r\n";
+        }
+    }
+
+    $body .= "--".$boundary."--";
+
+    return mail($to, $subject, $body, $headers);
 }
+
 
 // uploading files (max 2MB File Size, default)
 function uploadFile($fileInputName, $uploadDir, $customName = '', $allowedTypes = [], $maxSize = 2097152)

@@ -99,25 +99,15 @@
 </section>
 
 <section class="container my-5" id="apply">
+    
+    <div id="msg"></div>
+
     <h2 class="text-center mb-4">Apply Now</h2>
 
-    <?php if (isset($_GET['success'])) { ?>
-        <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
-            <strong>Success!</strong> <?= htmlspecialchars($_GET['success']); ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    <?php } ?>
-
-    <?php if (isset($_GET['error'])) { ?>
-        <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
-            <strong>Error!</strong> <?= htmlspecialchars($_GET['error']); ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    <?php } ?>
 
     <div class="apply-section bg-primary bg-opacity-10 bg-gradient p-4 py-5 p-md-5 rounded shadow-sm">
 
-        <form id="career-application-form" class="row g-3">
+        <form id="career-application-form" enctype="multipart/form-data" class="row g-3">
 
             <div class="col-md-6">
                 <label class="form-label">Full Name <span class="text-danger">*</span></label>

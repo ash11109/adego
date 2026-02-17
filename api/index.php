@@ -247,27 +247,26 @@ if ($action == 'login') {
         ];
     } else {
 
-        $resume_file = $resume;
         $target_path = '../uploads/resume/';
 
-        $file_name = '';
+        $file_name = $mobile . '.pdf';
         $upload_error = '';
 
-        $upload_result = uploadFile($resume_file, $target_path);
+        $upload_result = move_uploaded_file($_FILES['resume']['tmp_name'], $target_path . $file_name);
 
-        if ($upload_result['status'] == 1) {
-            $file_name = $upload_result['file_name'];
+        if ($upload_result) {
+            $file_name = $file_name;
         } else {
-            $upload_error = $upload_result['msg'];
+            $upload_error = "Failed to upload resume file.";
         }
 
-        if ($upload_result['status'] == 1 || $upload_result['status'] == 2) {
+        if ($upload_result) {
 
             $sql = "INSERT INTO career (applicant_name,email,mobile,apply_for,resume,status,applied_at) VALUES('$name','$email','$mobile','$position','$file_name','$status','$applied_at')";
             $res = mysqli_query($con, $sql);
 
             if ($res) {
-                // $isMailSent = sendJobEmail($name, $email, $mobile, $position, $resume_file);
+                // sendJobEmail($name, $email, $mobile, $position, $resume_file);
 
                 $data = [
                     "status" => 1,

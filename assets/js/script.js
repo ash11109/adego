@@ -88,13 +88,28 @@ $("#contact-form").submit(async function (e) {
     let result = await response.json();
 
     if (result.status == 1) {
-      window.location.href = `contact.php?success=${result.msg}`;
+      document.getElementById("msg").innerHTML = `
+        <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+            <strong>Success!</strong> ${result.msg}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      `;
     } else {
-      window.location.href = `contact.php?error=${result.msg}`;
+      document.getElementById("msg").innerHTML = `
+        <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+            <strong>Error!</strong> ${result.msg}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      `;
     }
 
   } catch (error) {
-    window.location.href = "contact.php?error=Failed to send message. Please try again later.";
+    document.getElementById("msg").innerHTML = `
+        <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+            <strong>Error!</strong> Failed to send message. Please try again later.
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      `;
   } finally {
     $btn.prop("disabled", false).html(btnText);
   }
@@ -114,7 +129,12 @@ $("#career-application-form").submit(async function (e) {
 
     if (result !== true) {
       e.preventDefault();
-      window.location.href = "career.php?error=" + encodeURIComponent(result);
+      document.getElementById("msg").innerHTML = `
+        <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+            <strong>Error!</strong> ${result}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      `;
     }
   }
 
@@ -136,13 +156,28 @@ $("#career-application-form").submit(async function (e) {
     let result = await response.json();
 
     if (result.status == 1) {
-      window.location.href = `career.php?success=${result.msg}`;
+      document.getElementById("msg").innerHTML = `
+        <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+            <strong>Success!</strong> ${result.msg}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      `;
     } else {
-      window.location.href = `career.php?error=${result.msg}`;
+      document.getElementById("msg").innerHTML = `
+        <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+            <strong>Error!</strong> ${result.msg}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      `;
     }
 
   } catch (error) {
-    window.location.href = "career.php?error=Failed to submit job application. Please try again later." + error;
+    document.getElementById("msg").innerHTML = `
+        <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+            <strong>Error!</strong> Failed to submit job application. Please try again later.
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      `;
   } finally {
     $btn.prop("disabled", false).html(btnText);
   }

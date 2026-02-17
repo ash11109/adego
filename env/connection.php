@@ -3,6 +3,13 @@ date_default_timezone_set("Asia/Calcutta");
 
 // =================================================================================================
 
+// live server
+
+// $server = "localhost";
+// $dbusername = "jharkhan_adego";
+// $dbpassword = "immortals#17";
+// $database = "jharkhan_adego";
+
 // ash
 
 $server = "localhost";
